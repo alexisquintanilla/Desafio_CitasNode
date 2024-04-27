@@ -6,7 +6,6 @@ import moment from 'moment';
 import { engine } from 'express-handlebars';
 import chalk from 'chalk';
 
-
 //express
 const app = express()
 
@@ -14,7 +13,7 @@ const app = express()
 const __dirname = import.meta.dirname
 
 // middleware archivos estáticos
-app.use(express.static('data'))
+app.use(express.static('public'))
 app.use('/assets/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'))
 app.use('/assets/js', express.static(__dirname + '/node_modules/bootstrap/dist/js'))
 // moments
@@ -32,9 +31,8 @@ app.get('/pacientes', async (req, res) => {
     try {
         const { data } = await axios.get('https://randomuser.me/api/')
         const newUser = data.results[0]
-        const id = uuidv4().slice(0, 6)
+        const id = uuidv4().slice(0, 3)
         const fecha = moment().format('D MMMM YYYY, h:mm:ss a')
-
         const arrayUser = {
             name: newUser.name.first,
             apellido: newUser.name.last,
@@ -42,12 +40,10 @@ app.get('/pacientes', async (req, res) => {
             fecha: fecha,
             genero: newUser.gender,
         }
-
-
         usuarios.push(arrayUser)
         generoDivision = _.partition(usuarios, (item) => item.genero === "male")
         console.log(chalk.bgWhite.blue(JSON.stringify(generoDivision, null, 2)))
-        return res.json(generoDivision)
+        return res.redirect('/')
     } catch (error) {
         console.log(error)
         return res.status(500).json({ ok: false })
@@ -62,8 +58,6 @@ app.get('/', (req, res) => {
         return res.status(500).json({ ok: false })
     }
 })
-
-
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => console.log('server andando...'))

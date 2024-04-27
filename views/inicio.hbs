@@ -1,21 +1,63 @@
-<h1>Lista de Pacientes</h1>
+<div class="container">
+    <div class="pt-5">
+        <h1 class="text-center">Lista de Pacientes</h1>
 
-<div>
-    <h3>Hombres</h3>
-    <ol>
-        {{#each usuarios.[0]}}
-        <li>{{name}} - {{apellido}} - {{id}} - {{fecha}} - {{genero}}</li>
-        {{/each}}
-    </ol>
-</div>
+    </div>
+
+    <form class="p-5 " method="get" action="/pacientes">
+        <button type="submit" class="btn btn-dark">Crear Usuario aleatorio</button>
+    </form>
 
 
-<div>
-    <h3>Mujeres</h3>
-    <ol>
-        {{#each usuarios.[1]}}
-        <li>{{name}} - {{apellido}} - {{id}} - {{fecha}} - {{genero}}</li>
-        {{/each}}
-    </ol>
+    <div class="text-center bg-dark text-white">
+        <h3>HOMBRES</h3>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Genero</th>
+                <th scope="col">Fecha</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each usuarios.[0]}}
+            <tr>
+                <th scope="row">{{id}}</th>
+                <td>{{name}}</td>
+                <td>{{apellido}}</td>
+                <td>{{genero}}</td>
+                <td>{{fecha}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
 
+    <div class="text-center bg-dark text-white">
+        <h3>MUJERES</h3>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Genero</th>
+                <th scope="col">Fecha</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each usuarios.[1]}}
+            <tr>
+                <th scope="row">{{id}}</th>
+                <td>{{name}}</td>
+                <td>{{apellido}}</td>
+                <td>{{genero}}</td>
+                <td>{{fecha}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
 </div>
